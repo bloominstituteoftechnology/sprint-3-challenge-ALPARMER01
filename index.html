@@ -233,10 +233,10 @@
         this.ants = names.map(name => ({name, health: 100}));
       }
       work() {
+        const total = this.ants.length
         if (this.ants.length === 0) {
           return 'No ants here. Did you work them to death?';
         }
-        const total = this.ants.length
         this.ants.forEach(ant => {
           ant.health -= 20;
           if (ant.health <= 0) {
