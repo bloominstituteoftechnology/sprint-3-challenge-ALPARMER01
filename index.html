@@ -233,19 +233,15 @@
         this.ants = names.map(name => ({name, health: 100}));
       }
       work() {
-        if (this.ants.length === 0) {
-          return 'No ants here. Did you work them to death?';
-        }
-        const healthy = this.ants.filter(ant => ant.health > 0)
-        const total = healthy.length;
-        this.ants.forEach(ant => {
+        const numAnts = this.ants.length;
+        for (let i = numAnts - 1; i >= 0; i--) {
+          const ant = this.ants[i];
           ant.health -= 20;
           if (ant.health <= 0) {
-            let index = this.ants.indexOf(ant);
-            this.ants.splice(index);
+            this.ants.splice(i, 1);
           }
-        })
-        return `${total} ants starting work!`
+        }
+        return numAnts ? `${numAnts} ants starting work!` : 'No ants here. Did you work them to death?'
       }
       feed(name) {
         const ant = this.ants.filter(ant => ant.name === name);
